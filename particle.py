@@ -78,6 +78,8 @@ class ParticleEmitter:
   lifetime_min = 0
   active = 0
   emitter_lifetime = -1
+  radius = 10
+  randomRotate = 0
   def __init__(self,pmanager):
     self.sourcep1 = Vector2d(0,0)
     self.sourcep2 = Vector2d(0,0)
@@ -93,9 +95,15 @@ class ParticleEmitter:
     p.setIsActive(1)
     p.setLifetime(self.lifetime_min + (self.lifetime_max - self.lifetime_min) * f)
     p.setTexture(self.texture)
-    p.setRadius(10)
+    p.setRadius(self.radius)
+    if self.randomRotate:
+      p.setAngle(randint(0,360))
     #p.getPosition().display()
     #p.getVelocity().display()
+  def setRandomRotate(self,b):
+    self.randomRotate = b
+  def setRadius(self,r):
+    self.radius = r 
   def setFrequency(self,f):
     self.frequency = f
   def setTexture(self,texture):

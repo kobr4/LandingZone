@@ -40,6 +40,7 @@ class Mobile:
     self.radius = 0.0
     self.color = [1, 1, 1]
     self.thrustVector = Vector2d(0,0)
+    self.initialThrustVector = Vector2d(0,0)
     self.texture = 0
     self.physicalPoints = []
     self.updatedPhysicalPoints = []
@@ -60,6 +61,15 @@ class Mobile:
       if point.getX() < by or point.getX() > ty:
         return 0
     return 1
+  def setupPhysicalPoint(self):
+     p = Vector2d(self.position.getX()-self.radius,self.position.getY()+self.radius)
+     self.addPhysicalPoint(p)
+     p = Vector2d(self.position.getX()-self.radius,self.position.getY()-self.radius)
+     self.addPhysicalPoint(p)
+     p = Vector2d(self.position.getX()+self.radius,self.position.getY()+self.radius)
+     self.addPhysicalPoint(p)
+     p = Vector2d(self.position.getX()+self.radius,self.position.getY()+self.radius)
+     self.addPhysicalPoint(p)
   def addPhysicalPoint(self,point):
     self.physicalPoints.append(Vector2d(point.getX(),point.getY()))
     self.updatedPhysicalPoints.append(Vector2d(point.getX(),point.getY()))
@@ -77,6 +87,10 @@ class Mobile:
     self.thrustVector.set(x,y)
   def getThrustVector(self):
     return self.thrustVector
+  def setInitialThrustVector(self,x,y):
+    self.initialThrustVector.set(x,y)
+  def getInitialThrustVector(self):
+    return self.initialThrustVector
   def getColor(self):
     return self.color
   def setColor(self,r,g,b):
@@ -121,7 +135,8 @@ class Mobile:
 
   def getAngle(self):    
     return self.angle
-
+  def setAngle(self,a):
+    self.angle = a
   def drawForce(self,canvas):
     sx = self.getPhysicalPosition().getX()
     sy = self.getPhysicalPosition().getY()
@@ -257,8 +272,6 @@ class Body(Mobile):
       mobile.applyForce(step,vector)
 
   def applyStep(self,step):
-    self.oldposition.set(self.getPosition().getX(),self.getPosition().getY())
-    self.oldangle = self.angle
     v = self.getVelocity()
     v.set(0.0,0.0)
     #self.angularVelocity = 0.0
@@ -288,17 +301,24 @@ class Body(Mobile):
     v.mulScalar(step)
     self.getPosition().add(v)
     #print "ANGULAR VELOCITY=%f"%(self.angularVelocity)
+    
     self.angle += self.angularVelocity * step*0.001   
+    #self.angularVelocity = self.angularVelocity / 2.0
     self.updateMobiles()
  
-    print 'TOTO: %d %d'%(self.stablecount,self.stable)
-    print '%f - %f'%(self.angle,self.oldangle)
-    print '%d'%int(fabs(self.getPosition().getX()-self.oldposition.getX()))
-    print '%d'%int(fabs(self.getPosition().getY()-self.oldposition.getY()))
+    #print 'TOTO: %d %d'%(self.stablecount,self.stable)
+    #print '%f - %f'%(self.angle,self.oldangle)
+    #print '%d'%int(fabs(self.getPosition().getX()-self.oldposition.getX()))
+    #print '%d - %f - %f'%(int(fabs(self.getPosition().getY()-self.oldposition.getY())),self.getPosition().getY(),self.oldposition.getY())
     if int(self.angle) == int(self.oldangle) and int(fabs(self.getPosition().getX()-self.oldposition.getX())) <= 1 and int(fabs(self.getPosition().getY()-self.oldposition.getY())) <= 1 :
       self.stablecount += 1
       if self.stablecount > 180:
         self.stable = 1
+    else :
+      self.stablecount = 0
+
+    self.oldposition.set(self.getPosition().getX(),self.getPosition().getY())
+    self.oldangle = self.angle
     #self.getPosition().display()
     #v = Vector2d(0,0)
     #for mobile in self.mobiles:
@@ -313,8 +333,10 @@ class Body(Mobile):
       mobile.getPhysicalPosition().set(p.getX(),p.getY())
       mobile.getPhysicalPosition().rotate(self.angle)      
       mobile.getPhysicalPosition().add(self.getPosition())
+      mobile.getThrustVector().set(mobile.getInitialThrustVector().getX(),mobile.getInitialThrustVector().getY())
       mobile.getThrustVector().rotate(self.angle)
       mobile.updatePhysicalPoints(self.getPosition(),self.angle)
+      mobile.getThrustVector().display()
 
   def getMobiles(self):
     return self.mobiles

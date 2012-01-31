@@ -45,7 +45,7 @@ class TextureHelper:
     return texture
   @staticmethod
   def loadTextureFromFile(filename):
-    return Image(filename).texture
+    return Image('gfx/' + filename).texture
 
 class Landingzone:
   top = 0

@@ -24,6 +24,7 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import kivy
 kivy.require('1.0.9') # replace with your current kivy version !
+import os.path
 
 from random import random
 from kivy.app import App
@@ -50,7 +51,7 @@ from xml.dom.minidom import parse, parseString
 class TextureHelper:
   @staticmethod
   def generateGradient(sx,sy):
-    texture = Texture.create(size=(sx, sy))   
+    texture = Texture.create(size=(sx, sy))
     # create 64x64 rgb tab, and fill with value from 0 to 255
     # we'll have a gradient from black to white
     #size = sx * sy * 3
@@ -62,7 +63,7 @@ class TextureHelper:
     return texture
   @staticmethod
   def loadTextureFromFile(filename):
-    return Image(filename).texture
+    return Image('gfx/' + filename).texture
 
 class Game:
   world = 0
@@ -78,26 +79,21 @@ class Game:
   def setupMenu(self):
     self.gui = Gui()
     self.gui.setupMenu(self)
-    self.setupBackground('level01.xml')
+    self.setupBackground('levels/menu.xml')
   def setupLevel(self, *largs):
     print "CURRENT LEVEL %d"%self.currentLevel
-    if self.currentLevel == 1:
+    
+    levelstring = 'levels/level'
+    levelstring +=`self.currentLevel`.zfill(2)
+    levelstring +='.xml'
+    print levelstring
+    if os.path.isfile(levelstring):
       self.gui.messaging.reset()
       self.gameResult = 0
-      self.setupWorld('level01.xml')
-      self.setupBackground('level01.xml')
-      self.setupShip('level01.xml')
-      self.gui.messaging.displayText('Level %d'%(self.currentLevel),150)
-
-    if self.currentLevel == 2:
-      self.gui.messaging.reset()
-      self.gameResult = 0
-      self.setupWorld('level02.xml')
-      self.setupBackground('level02.xml')
-      self.setupShip('level02.xml')
-      self.gui.messaging.displayText('Level %d'%(self.currentLevel),150)
-
-    if self.currentLevel > 2:
+      self.setupWorld(levelstring)
+      self.setupBackground(levelstring)
+      self.setupShip(levelstring)
+    else:
       self.gui.messaging.reset()
       self.mainbody = 0
       self.setupWorld('endgame.xml')
@@ -199,7 +195,8 @@ class Game:
             m.setVelocity(float(values[0]),float(values[1]))
           if childnode.localName == "thrust":
             values = childnode.getAttribute('value').split(',')
-            m.setThrustVector(float(values[0]),float(values[1]))                         
+            m.setThrustVector(float(values[0]),float(values[1]))
+            m.setInitialThrustVector(float(values[0]),float(values[1]))                          
           if childnode.localName == "mass":
             value = childnode.getAttribute('value')
             m.setMass(float(value))      
@@ -209,11 +206,12 @@ class Game:
           if childnode.localName == "texture":
             value = childnode.getAttribute('value')
             m.setTexture(TextureHelper.loadTextureFromFile(value))
-          if childnode.localName == "physicalPoints":
-            for ppointnode in childnode.childNodes:
-              if ppointnode.localName == "point":
-                values = ppointnode.getAttribute('value').split(',')
-                m.addPhysicalPoint(Vector2d(float(values[0]),float(values[1])))
+          #if childnode.localName == "physicalPoints":
+          #  for ppointnode in childnode.childNodes:
+          #    if ppointnode.localName == "point":
+          #      values = ppointnode.getAttribute('value').split(',')
+          #      m.addPhysicalPoint(Vector2d(float(values[0]),float(values[1])))
+        m.setupPhysicalPoint()
         self.mainbody.addMobile(m)
     self.mainbody.init()
     focus_position = self.mainbody.getPosition()
