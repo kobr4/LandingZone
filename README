@@ -1,5 +1,11 @@
 LandingZone is an entry to the Kivy 2012 programming contest.
 
-- Try to land the different shapes on the target area.
+- Before starting this contest I didn't know anything about Kivy or Python, so there should be some ugly coding in there ;) 
 
-- Plays best on multi-touch screen.
+- This is a very experimental game concept : try to land the different shapes on the target area by taping on the different 'engines' (an arrow indicates the direction of the thrust)
+
+- Physics engine is broken, no doubt about that ;(
+
+- Will not play well outside of the 800x600 resolution
+
+- Plays best on multi-touch screen (although it doesn't display correctly on my android tablet).
