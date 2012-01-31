@@ -1,8 +1,11 @@
-LandingZone is an entry to the Kivy 2012 programming contest.
+LandingZone is an entry to the Kivy 2012 programming contest
+------------------------------------------------------------
 
-- Before starting this contest I didn't know anything about Kivy or Python, so there should be some ugly coding in there ;) 
+- Before starting this contest I didn't know anything about Kivy or Python, so there should be 
+  some ugly coding in there ;) 
 
-- This is a very experimental game concept : try to land the different shapes on the target area by taping on the different 'engines' (an arrow indicates the direction of the thrust)
+- This is a very experimental game concept : try to land the different shapes on the target area 
+  by taping on the different 'engines' (an arrow indicates the direction of the thrust)
 
 - Physics engine is broken, no doubt about that ;(
 
