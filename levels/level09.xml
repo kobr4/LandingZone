@@ -1,0 +1,64 @@
+<xml>
+  <ship>
+    <position value='200,600'/>
+    <mobile>
+      <position value='-60,0'/>
+      <velocity value='0,0'/>
+      <mass value='10'/>
+      <radius value='30'/>
+      <thrust value='0.0,0.0'/>
+      <texture value='empty.png'/>
+    </mobile>
+    <mobile>
+      <position value='0,0'/>
+      <velocity value='0,0'/>
+      <mass value='10'/>
+      <radius value='30'/>
+      <thrust value='1.0,0.0'/>
+      <texture value='empty.png'/>
+    </mobile>
+    <mobile>
+      <position value='60,0'/>
+      <velocity value='0,0'/>
+      <mass value='10'/>
+      <radius value='30'/>
+      <thrust value='1.0,0.0'/>
+      <texture value='arrowright.png'/>
+    </mobile>
+  </ship>
+  <background>
+    <layer>
+      <texture value='sky.png'/>
+      <tilesize value='screenw,screenh'/>
+      <position value='0,0'/>
+      <layersize value='screenw,screenh'/>
+    </layer>
+    <layer>
+      <texture value='ground.png'/>
+      <tilesize value='64,64'/>
+      <position value='0,0'/>
+      <layersize value='screenw,64'/>
+    </layer>
+    <layer>
+      <texture value='hill.png'/>
+      <tilesize value='256,128'/>
+      <position value='0,64'/>
+      <layersize value='screenw,128'/>
+    </layer>
+    <layer>
+      <texture value='clouds.png'/>
+      <tilesize value='512,512'/>
+      <position value='0,100'/>
+      <layersize value='screenw,screenh'/>
+      <offset value='1,0'/>
+    </layer>
+  </background>
+  <world>
+    <size value='screenw,screenh'/>
+    <landingzone value='500,0,700,64'/>
+    <gravity value='0,-1.8'/>
+    <planes>
+      <plane value='0,70,screenw,85'/>
+    </planes>
+  </world>
+</xml>
