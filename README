@@ -1,1 +1,5 @@
-LandingZone is an entry to the Kivy 2011 programming contest.
+LandingZone is an entry to the Kivy 2012 programming contest.
+
+- Try to land the different shapes on the target area.
+
+- Plays best on multi-touch screen.
