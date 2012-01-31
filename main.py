@@ -72,7 +72,7 @@ class Game:
   gui = 0
   mainbody = 0
   gameResult = 0
-  currentLevel = 5
+  currentLevel = 1
   def __init__(self):
     self.world = World()
     self.camera = Camera()
