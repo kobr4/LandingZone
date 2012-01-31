@@ -22,6 +22,8 @@
 # ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+import kivy
+kivy.require('1.0.9') # replace with your current kivy version !
 
 from random import random
 from kivy.app import App
@@ -44,22 +46,6 @@ from camera import Camera
 from mobile import Mobile,Body,Shape
 from gui import Gui
 from xml.dom.minidom import parse, parseString
-
-class Engine:
-  def __init__(self,px,py,tx,ty):
-    self.position = Vector2d(px,py)
-    self.vector = Vector2d(tx,ty)
-
-class Module:
-  def __init__(self,px,py,mass):
-    self.position = Vector2d(px,py)
-    self.mass = mass
-
-class Ship:
-  def addEngine(self,engine):
-    self.engines.add(self,engine)
-  def addModule(self,module):
-    self.modules.add(module)
 
 class TextureHelper:
   @staticmethod
@@ -310,9 +296,9 @@ class YourWidget(Widget):
     #self.camera.focus(self.mobile1.getPosition(),self.mobile2.getPosition())
 
 
-class MyPaintApp(App):
+class LandingZoneApp(App):
     def build(self):
         return YourWidget()
 
 if __name__ == '__main__':
-    MyPaintApp().run()
+    LandingZoneApp().run()
