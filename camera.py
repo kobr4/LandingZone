@@ -66,7 +66,7 @@ class Camera:
     if p2.getY() > self.screenh and target.getY() > 0.0 :
      y = 0.0
 
-    p2.display()
+    #p2.display()
     target.set(x,y)
     self.position.add(target)  
   
