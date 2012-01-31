@@ -79,7 +79,7 @@ class World:
     self.mobiles = []
     self.planes = []
     self.gravity = Vector2d(0.0,0.0)
-    self.particlemanager = ParticleManager(1000)
+    self.particlemanager = ParticleManager(50)
     self.groundcollider = GroundCollider(self.particlemanager)
   def reset(self):
     self.mobiles = []

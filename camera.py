@@ -51,6 +51,23 @@ class Camera:
     distance = Vector2d.distance(target,current)
     target.sub(current)
     target.mulScalar(1.0/distance)
+    p = self.screenToWorld(0,0)
+    p2 = self.screenToWorld(self.screenw,self.screenh)
+    x = target.getX()
+    y = target.getY()
+    currentp = self.position.copy()
+    currentp.add(target)
+    if p.getX() < 0.0 and target.getX() < 0.0 :
+      x = 0.0
+    if p2.getX() > self.screenw and target.getX() > 0.0 :
+      x = 0.0 
+    if p.getY() < 0.0 and target.getY() < 0.0 : 
+      y = 0.0
+    if p2.getY() > self.screenh and target.getY() > 0.0 :
+     y = 0.0
+
+    p2.display()
+    target.set(x,y)
     self.position.add(target)  
   
   def focus(self,p1,p2):

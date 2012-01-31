@@ -165,7 +165,7 @@ class Mobile:
     else:
       return 0
   def on_touch_down(self, touch):
-    touchpos = Vector2d(touch.pos[0],touch.pos[1])
+    touchpos = Vector2d(touch.getX(),touch.getY())
     if self.isInbound(touchpos) == 1:
       #self.setColor(1.0,0,0)
       self.applyForce(100,self.thrustVector)

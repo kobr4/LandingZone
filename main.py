@@ -88,11 +88,13 @@ class Game:
     levelstring +='.xml'
     print levelstring
     if os.path.isfile(levelstring):
+      self.camera.scale = 1.1
       self.gui.messaging.reset()
       self.gameResult = 0
       self.setupWorld(levelstring)
       self.setupBackground(levelstring)
       self.setupShip(levelstring)
+      self.gui.messaging.displayText('Level %d'%(self.currentLevel),60)
     else:
       self.gui.messaging.reset()
       self.mainbody = 0
@@ -246,8 +248,8 @@ class Game:
     self.setupMenu()
 
   def updateGame(self,canvas):
-    #if self.mainbody != 0:
-    #  self.camera.follow(self.mainbody)
+    if self.mainbody != 0:
+      self.camera.follow(self.mainbody)
     self.camera.setup(canvas)
     self.background.draw(canvas)
 
@@ -269,7 +271,8 @@ class Game:
           self.currentLevel += 1 
           Clock.schedule_once(self.setupLevel, 5)
   def on_touch_down(self, touch):
-    self.world.on_touch_down(touch)
+    worldpos = self.camera.screenToWorld(touch.pos[0],touch.pos[1])
+    self.world.on_touch_down(worldpos)
     self.gui.on_touch_down(touch)
 
 class YourWidget(Widget):
@@ -284,13 +287,14 @@ class YourWidget(Widget):
     # transform the touch coordinate to local space
     touch.apply_transform_2d(self.to_local)
     #print 'The touch is at position', touch.pos
-
+     
     self.game.on_touch_down(touch)
 
   def update_graphics(self, *largs):
     self.canvas.clear()
     self.game.updateGame(self.canvas)
     self.canvas.ask_update()
+    #self.game.camera.follow(mainbody.getPosition())
     #self.camera.focus(self.mobile1.getPosition(),self.mobile2.getPosition())
 
 
