@@ -72,7 +72,7 @@ class Game:
   gui = 0
   mainbody = 0
   gameResult = 0
-  currentLevel = 1
+  currentLevel = 5
   def __init__(self):
     self.world = World()
     self.camera = Camera()
@@ -96,8 +96,8 @@ class Game:
     else:
       self.gui.messaging.reset()
       self.mainbody = 0
-      self.setupWorld('endgame.xml')
-      self.setupBackground('endgame.xml')
+      self.setupWorld('levels/endgame.xml')
+      self.setupBackground('levels/endgame.xml')
       self.gui.messaging.displayText('Congratulations ! !',-1)   
 
   def checkVictoryCondition(self):

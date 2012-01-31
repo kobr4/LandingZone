@@ -310,7 +310,7 @@ class Body(Mobile):
     #print '%f - %f'%(self.angle,self.oldangle)
     #print '%d'%int(fabs(self.getPosition().getX()-self.oldposition.getX()))
     #print '%d - %f - %f'%(int(fabs(self.getPosition().getY()-self.oldposition.getY())),self.getPosition().getY(),self.oldposition.getY())
-    if int(self.angle) == int(self.oldangle) and int(fabs(self.getPosition().getX()-self.oldposition.getX())) <= 1 and int(fabs(self.getPosition().getY()-self.oldposition.getY())) <= 1 :
+    if int(self.angle) == int(self.oldangle) and int(fabs(self.getPosition().getX()-self.oldposition.getX())) < 1 and int(fabs(self.getPosition().getY()-self.oldposition.getY())) < 1 :
       self.stablecount += 1
       if self.stablecount > 180:
         self.stable = 1
@@ -336,7 +336,6 @@ class Body(Mobile):
       mobile.getThrustVector().set(mobile.getInitialThrustVector().getX(),mobile.getInitialThrustVector().getY())
       mobile.getThrustVector().rotate(self.angle)
       mobile.updatePhysicalPoints(self.getPosition(),self.angle)
-      mobile.getThrustVector().display()
 
   def getMobiles(self):
     return self.mobiles
