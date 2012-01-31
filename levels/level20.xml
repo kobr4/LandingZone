@@ -7,7 +7,7 @@
       <mass value='10'/>
       <radius value='30'/>
       <thrust value='1.0,0.0'/>
-      <texture value='arrayright.png'/>
+      <texture value='arrowright.png'/>
     </mobile>
     <mobile>
       <position value='-60,0'/>
@@ -15,7 +15,7 @@
       <mass value='10'/>
       <radius value='30'/>
       <thrust value='0.0,1.0'/>
-      <texture value='arrayup.png'/>
+      <texture value='arrowup.png'/>
     </mobile>
     <mobile>
       <position value='0,0'/>
@@ -31,7 +31,7 @@
       <mass value='10'/>
       <radius value='30'/>
       <thrust value='0.0,-1.0'/>
-      <texture value='arraybottom.png'/>
+      <texture value='arrowbottom.png'/>
     </mobile>
     <mobile>
       <position value='0,-60'/>
@@ -39,7 +39,7 @@
       <mass value='10'/>
       <radius value='30'/>
       <thrust value='-1.0,0.0'/>
-      <texture value='arrayleft.png'/>
+      <texture value='arrowleft.png'/>
     </mobile>   
   </ship>
   <background>

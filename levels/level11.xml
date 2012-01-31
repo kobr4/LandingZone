@@ -23,7 +23,7 @@
       <mass value='10'/>
       <radius value='30'/>
       <thrust value='0.0,-1.0'/>
-      <texture value='arraybottom.png'/>
+      <texture value='arrowbottom.png'/>
     </mobile>
   </ship>
   <background>
