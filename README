@@ -10,3 +10,5 @@ LandingZone is an entry to the Kivy 2012 programming contest
 - Will not play well outside of the 800x600 resolution
 
 - Plays best on multi-touch screen (although it doesn't display correctly on my android tablet).
+
+- Distributed under the term of the BSD licence
